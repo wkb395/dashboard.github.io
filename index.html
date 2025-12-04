@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云端空间 | 登录</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1000px;
+            min-height: 600px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        /* 左侧登录表单 */
+        .login-container {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: white;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-icon {
+            color: #4a6ee0;
+            font-size: 32px;
+            margin-right: 12px;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: #4a6ee0;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 18px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #4a6ee0;
+            box-shadow: 0 0 0 2px rgba(74, 110, 224, 0.2);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+        }
+
+        .forgot-password {
+            color: #4a6ee0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .forgot-password:hover {
+            color: #3a5bc7;
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            background: linear-gradient(to right, #4a6ee0, #6a8eff);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(to right, #3a5bc7, #5a7eff);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(74, 110, 224, 0.3);
+        }
+
+        .social-login {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .social-text {
+            color: #666;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-text::before, .social-text::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: #eee;
+        }
+
+        .social-text::before {
+            left: 0;
+        }
+
+        .social-text::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .google {
+            background-color: #db4437;
+        }
+
+        .github {
+            background-color: #333;
+        }
+
+        .microsoft {
+            background-color: #00a4ef;
+        }
+
+        .register-link {
+            text-align: center;
+            color: #666;
+        }
+
+        .register-link a {
+            color: #4a6ee0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* 右侧欢迎信息 */
+        .welcome-container {
+            flex: 1;
+            background: linear-gradient(135deg, #4a6ee0 0%, #6a8eff 100%);
+            color: white;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-content p {
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features i {
+            margin-right: 12px;
+            font-size: 18px;
+        }
+
+        .learn-more {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .learn-more:hover {
+            background-color: white;
+            color: #4a6ee0;
+        }
+
+        .cloud-animation {
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.1;
+        }
+
+        .cloud-animation i {
+            font-size: 300px;
+            color: white;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                max-width: 500px;
+            }
+            
+            .welcome-container {
+                order: -1;
+                padding: 40px 30px;
+            }
+            
+            .login-container {
+                padding: 40px 30px;
+            }
+            
+            .cloud-animation {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 26px;
+            }
+            
+            .logo-text {
+                font-size: 24px;
+            }
+            
+            .welcome-content h2 {
+                font-size: 28px;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .forgot-password {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧登录表单 -->
+        <div class="login-container">
+            <div class="logo">
+                <i class="fas fa-cloud logo-icon"></i>
+                <div class="logo-text">云端<span>空间</span></div>
+            </div>
+            
+            <h1>欢迎回来</h1>
+            <p class="subtitle">请登录您的账户以继续使用云端服务</p>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="用户名或电子邮箱" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="密码" required>
+                </div>
+                
+                <div class="remember-forgot">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">记住我</label>
+                    </div>
+                    <a href="#" class="forgot-password">忘记密码?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">登录</button>
+            </form>
+            
+            <div class="social-login">
+                <div class="social-text">或使用以下方式登录</div>
+                <div class="social-icons">
+                    <div class="social-icon google">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="social-icon github">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="social-icon microsoft">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="register-link">
+                还没有账户? <a href="#" id="registerLink">立即注册</a>
+            </div>
+        </div>
+        
+        <!-- 右侧欢迎信息 -->
+        <div class="welcome-container">
+            <div class="welcome-content">
+                <h2>探索云端无限可能</h2>
+                <p>加入我们，体验高效、安全、可靠的云计算服务。无论您是开发者、企业还是个人用户，我们都能提供最适合您的云端解决方案。</p>
+                
+                <ul class="features">
+                    <li><i class="fas fa-check-circle"></i> 高性能云服务器</li>
+                    <li><i class="fas fa-check-circle"></i> 安全可靠的数据存储</li>
+                    <li><i class="fas fa-check-circle"></i> 灵活扩展的资源配置</li>
+                    <li><i class="fas fa-check-circle"></i> 7x24小时技术支持</li>
+                </ul>
+                
+                <a href="#" class="learn-more">了解更多功能</a>
+            </div>
+            
+            <div class="cloud-animation">
+                <i class="fas fa-cloud"></i>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const registerLink = document.getElementById('registerLink');
+            
+            // 登录表单提交处理
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const rememberMe = document.getElementById('remember').checked;
+                
+                // 简单验证
+                if (!username || !password) {
+                    alert('请输入用户名和密码');
+                    return;
+                }
+                
+                // 模拟登录过程
+                const loginBtn = document.querySelector('.login-btn');
+                const originalText = loginBtn.textContent;
+                
+                loginBtn.textContent = '登录中...';
+                loginBtn.disabled = true;
+                
+                // 模拟API请求延迟
+                setTimeout(() => {
+                    // 这里在实际应用中会发送请求到后端
+                    console.log('登录信息:', { username, password, rememberMe });
+                    
+                    // 模拟成功登录
+                    alert(`欢迎回来，${username}！登录成功！\n（此仅为前端演示，实际应用需连接后端验证）`);
+                    
+                    // 重置按钮状态
+                    loginBtn.textContent = originalText;
+                    loginBtn.disabled = false;
+                    
+                    // 在实际应用中，这里会进行页面跳转
+                    // window.location.href = '/dashboard';
+                }, 1500);
+            });
+            
+            // 注册链接点击
+            registerLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('即将跳转到注册页面\n（此仅为前端演示）');
+                // 在实际应用中，这里会跳转到注册页面
+                // window.location.href = '/register';
+            });
+            
+            // 忘记密码链接
+            document.querySelector('.forgot-password').addEventListener('click', function(e) {
+                e.preventDefault();
+                const email = prompt('请输入您的注册邮箱地址：');
+                if (email) {
+                    alert(`重置密码链接已发送至 ${email}\n（此仅为前端演示）`);
+                }
+            });
+            
+            // 社交登录图标点击
+            document.querySelectorAll('.social-icon').forEach(icon => {
+                icon.addEventListener('click', function() {
+                    const platform = this.classList.contains('google') ? 'Google' : 
+                                   this.classList.contains('github') ? 'GitHub' : 'Microsoft';
+                    alert(`即将通过 ${platform} 登录\n（此仅为前端演示）`);
+                });
+            });
+            
+            // 了解更多链接
+            document.querySelector('.learn-more').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('即将跳转到产品功能介绍页面\n（此仅为前端演示）');
+            });
+            
+            // 添加简单的输入验证效果
+            document.querySelectorAll('.input-group input').forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (this.value.trim() === '') {
+                        this.style.borderColor = '#ff4757';
+                    } else {
+                        this.style.borderColor = '#4a6ee0';
+                    }
+                });
+                
+                input.addEventListener('focus', function() {
+                    this.style.borderColor = '#4a6ee0';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
